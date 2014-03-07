@@ -36,32 +36,23 @@ public class TicTacToeGame {
         // setup
         board.drawBoard();
 
-        // player one turn
-        int location1= promptMove(bufferedReader);
+        while (!board.isFull()) {
 
-        while (board.isLocationTaken(location1)) {
+            String marker= (isPlayerOneTurn ? playerOneMarker : playerTwoMarker);
 
-            printStream.println("Location already taken, try again");
-            location1= promptMove(bufferedReader);
+            int location= promptMove(bufferedReader);
+
+            while (board.isLocationTaken(location)) {
+                printStream.println("Location already taken, try again");
+                location= promptMove(bufferedReader);
+            }
+
+            board.makeMove(location, marker);
+            board.drawBoard();
+            isPlayerOneTurn= !isPlayerOneTurn;
         }
 
-        board.makeMove(location1, playerOneMarker);
-
-        board.drawBoard();
-
-        // player two turn
-        isPlayerOneTurn= false;
-        int location2= promptMove(bufferedReader);
-
-        while (board.isLocationTaken(location2)) {
-
-            printStream.println("Location already taken, try again");
-            location2= promptMove(bufferedReader);
-        }
-
-        board.makeMove(location2, playerTwoMarker);
-
-        board.drawBoard();
+        printStream.println("Game is a draw");
 
 
     }

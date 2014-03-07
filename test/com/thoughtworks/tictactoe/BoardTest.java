@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -75,6 +77,31 @@ public class BoardTest {
         assertEquals(false, board.isLocationTaken(location));
     }
 
+    @Test
+    public void shouldReturnFalseWhenBoardIsNotFull() {
+
+        board.drawBoard();
+
+        assertFalse(board.isFull());
+    }
+
+    @Test
+    public void shouldReturnFalseWhenBoardIsFull() {
+
+        String[] locations= new String[9];
+        String marker= "X";
+
+        for (int loc = 0; loc < locations.length; loc++) {
+             board.makeMove(loc + 1, marker);
+        }
+
+        assertTrue(board.isFull());
+    }
+
+    @Test
+    public void shouldPrintMessageToConsoleWhenBoardIsFull() {
+
+    }
 
 //    @Test
 //    public void shouldDisplayMessageIfLocationIsAlreadyTaken() {

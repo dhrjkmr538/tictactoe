@@ -62,4 +62,16 @@ public class Board {
         return isTaken;
     }
 
+    public boolean isFull() {
+
+        boolean isFull= true;
+
+        for (int i = 0; i < locations.length; i++) {
+            if (locations[i].equals(" ")) {
+                isFull= false;
+            }
+
+        }
+        return isFull;
+    }
 }
