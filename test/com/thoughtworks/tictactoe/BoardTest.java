@@ -76,19 +76,19 @@ public class BoardTest {
     }
 
 
-    @Test
-    public void shouldDisplayMessageIfLocationIsAlreadyTaken() {
-
-        String message= "Location already taken, try again";
-        int location=1;
-        String marker="X";
-
-        board.makeMove(location,marker);
-        board.makeMove(location,marker);
-
-
-        verify(printStream).println(message);
-    }
+//    @Test
+//    public void shouldDisplayMessageIfLocationIsAlreadyTaken() {
+//
+//        String message= "Location already taken, try again";
+//        int location=1;
+//        String marker="X";
+//
+//        board.makeMove(location,marker);
+//        board.makeMove(location,marker);
+//
+//
+//        verify(printStream).println(message);
+//    }
 
 
 

@@ -45,19 +45,10 @@ public class Board {
 
     public String makeMove(int location, String marker) {
 
-        String message= "";
-
-        if (isLocationTaken(location)) {
-            message= "Location already taken, try again";
-            printStream.println(message);
-        } else {
-
-            locations[location - 1]= marker;
-        }
-
-
+        locations[location - 1]= marker;
         return locations[location - 1];
     }
+
 
     public boolean isLocationTaken (int location) {
 
@@ -67,7 +58,6 @@ public class Board {
 
             isTaken= true;
         }
-
 
         return isTaken;
     }

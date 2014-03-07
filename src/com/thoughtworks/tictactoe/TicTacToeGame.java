@@ -11,19 +11,21 @@ import java.io.PrintStream;
 public class TicTacToeGame {
 
     private Board board;
+    private PrintStream printStream;
 
     private final String playerOneMarker= "X";
     private final String playerTwoMarker= "O";
     private boolean isPlayerOneTurn= true;
 
 
-    public TicTacToeGame(Board board) {
+    public TicTacToeGame(Board board, PrintStream printStream) {
         this.board= board;
+        this.printStream= printStream;
     }
 
     public static void main(String[] args) throws IOException {
 
-        TicTacToeGame game= new TicTacToeGame(new Board(System.out));
+        TicTacToeGame game= new TicTacToeGame(new Board(System.out), System.out);
         game.playGame();
     }
 
@@ -36,6 +38,13 @@ public class TicTacToeGame {
 
         // player one turn
         int location1= promptMove(bufferedReader);
+
+        while (board.isLocationTaken(location1)) {
+
+            printStream.println("Location already taken, try again");
+            location1= promptMove(bufferedReader);
+        }
+
         board.makeMove(location1, playerOneMarker);
 
         board.drawBoard();
@@ -43,9 +52,14 @@ public class TicTacToeGame {
         // player two turn
         isPlayerOneTurn= false;
         int location2= promptMove(bufferedReader);
+
+        while (board.isLocationTaken(location2)) {
+
+            printStream.println("Location already taken, try again");
+            location2= promptMove(bufferedReader);
+        }
+
         board.makeMove(location2, playerTwoMarker);
-
-
 
         board.drawBoard();
 

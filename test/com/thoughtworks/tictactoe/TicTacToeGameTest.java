@@ -28,8 +28,8 @@ public class TicTacToeGameTest {
     @Before
     public void setUp() {
         printStream= mock(PrintStream.class);
-        board= new Board(printStream);
-        game= new TicTacToeGame(board);
+        board= mock(Board.class);
+        game= new TicTacToeGame(board, printStream);
         bufferedReader= mock(BufferedReader.class);
     }
 
@@ -45,37 +45,48 @@ public class TicTacToeGameTest {
         assertEquals(1, selectedLocation);
     }
 
-/* test:
-  - playGame calls drawBoard
-    - playGame calls makeMove
-*/
+
+
+    @Test
+    public void playGameShouldCallDrawBoard() throws IOException {
+        game.playGame();
+
+        verify(board).drawBoard();
+    }
+
+    /** Not sure how to test this exactly */
 //    @Test
-//    public void makePlayerOneMoveShouldDrawXWhenLocationZeroSelected() {
+//    public void playGameShouldCallMakeMove() throws IOException {
+//        String marker= "X";
+//
+//        when(bufferedReader.readLine()).thenReturn("1");
+//
+//        game.playGame();
+//        int location= game.promptMove(bufferedReader);
+//
+//
+//        //when(board.isLocationTaken(location)).thenReturn(false);
+//
+//        verify(board).makeMove(location, marker);
+
+//    }
+
+
+    /** Can't test properly until multiple turns can be implemented? */
+//    @Test
+//    public void shouldDisplayMessageIfLocationIsAlreadyTaken() throws IOException {
+//
+//        String message= "Location already taken, try again";
 //        int location=1;
+//        String marker="X";
 //
-//        String result= board.makeMove(location, "X");
+//        when(bufferedReader.readLine()).thenReturn("1");
 //
-//        assertEquals("X", result);
-//    }
-
-//    @Test
-//    public void makePlayerTwoMoveShouldDrawOWhenLocationOneSelected() {
-//
-//        String result= game.makePlayerTwoMove(2);
-//
-//        assertEquals("O", result);
-//
-//    }
-
-//    @Test
-//    public void displayTryAgainWhenLocationAlreadyTaken() {
-//
-//        locations[0]= "X";
+//        game.playGame();
 //
 //
 //
-//        assertEquals(true, game.isLocationTaken(1, printStream));
-//
+//        verify(printStream).println(message);
 //    }
 
 
