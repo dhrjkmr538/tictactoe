@@ -3,10 +3,7 @@ package com.thoughtworks.tictactoe;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.PrintStream;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -27,36 +24,51 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldDrawBoardOnConsole() {
+    public void shouldDrawEmptyBoard() {
 
-        String emptyRow= " | | ";
-        String separator= "--------";
-        String row= emptyRow + "\n" + separator + "\n";
+        String emptyBoard= " | | \n"
+                         + "-----\n"
+                         + " | | \n"
+                         + "-----\n"
+                         + " | | \n";
 
-        board.drawBoard();
+        board.draw();
 
-        verify(printStream).println(row + row + emptyRow + "\n");
-
+        verify(printStream).println(emptyBoard);
     }
 
-
     @Test
-    public void shouldDrawXWhenPlayerOneMoves() {
+    public void shouldMarkXWhenPlayerOneMoves() {
         int location=1;
         String marker="X";
-        String result= board.makeMove(location, marker);
 
-        assertEquals("X", result);
+        String updatedBoard = "X| | \n"
+                            + "-----\n"
+                            + " | | \n"
+                            + "-----\n"
+                            + " | | \n";
+
+        board.mark(location, marker);
+        board.draw();
+
+        verify(printStream).println(updatedBoard);
     }
 
     @Test
-    public void shouldDrawOWhenPlayerTwoMoves() {
-        int location=2;
+    public void shouldMarkOWhenPlayerTwoMoves() {
+        int location=1;
         String marker="O";
-        String result= board.makeMove(location, marker);
 
-        assertEquals("O", result);
+        String updatedBoard = "O| | \n"
+                            + "-----\n"
+                            + " | | \n"
+                            + "-----\n"
+                            + " | | \n";
 
+        board.mark(location, marker);
+        board.draw();
+
+        verify(printStream).println(updatedBoard);
     }
 
     @Test
@@ -64,58 +76,41 @@ public class BoardTest {
         int location=3;
         String marker="X";
 
-        board.makeMove(location, marker);
+        board.mark(location, marker);
 
-        assertEquals(true, board.isLocationTaken(location));
+        assertTrue(board.isLocationTaken(location));
     }
 
     @Test
     public void shouldReturnFalseIfLocationIsNotTaken() {
         int location=4;
-        String marker="X";
 
-        assertEquals(false, board.isLocationTaken(location));
+        assertFalse(board.isLocationTaken(location));
     }
 
     @Test
     public void shouldReturnFalseWhenBoardIsNotFull() {
-
-        board.drawBoard();
+        board.draw();
 
         assertFalse(board.isFull());
     }
 
     @Test
-    public void shouldReturnFalseWhenBoardIsFull() {
-
-        String[] locations= new String[9];
+    public void shouldReturnTrueWhenBoardIsFull() {
         String marker= "X";
 
-        for (int loc = 0; loc < locations.length; loc++) {
-             board.makeMove(loc + 1, marker);
-        }
+        board.mark(1, marker);
+        board.mark(2, marker);
+        board.mark(3, marker);
+        board.mark(4, marker);
+        board.mark(5, marker);
+        board.mark(6, marker);
+        board.mark(7, marker);
+        board.mark(8, marker);
+        board.mark(9, marker);
 
         assertTrue(board.isFull());
     }
-
-    @Test
-    public void shouldPrintMessageToConsoleWhenBoardIsFull() {
-
-    }
-
-//    @Test
-//    public void shouldDisplayMessageIfLocationIsAlreadyTaken() {
-//
-//        String message= "Location already taken, try again";
-//        int location=1;
-//        String marker="X";
-//
-//        board.makeMove(location,marker);
-//        board.makeMove(location,marker);
-//
-//
-//        verify(printStream).println(message);
-//    }
 
 
 
