@@ -30,14 +30,14 @@ public class TicTacToeGame {
 
         while (!board.isFull()) {
 
-            int location= player.makeMove(isPlayerOneTurn, bufferedReader);
+            int position= player.makeMove(isPlayerOneTurn, bufferedReader);
 
-            while (board.isLocationTaken(location)) {
+            while (board.isPositionTaken(position)) {
                 System.out.println("Location already taken, try again");
-                location= player.makeMove(isPlayerOneTurn, bufferedReader);
+                position= player.makeMove(isPlayerOneTurn, bufferedReader);
             }
 
-            board.mark(location, player.getPlayerMarker(isPlayerOneTurn));
+            board.mark(position, player.getPlayerMarker(isPlayerOneTurn));
             board.draw();
             isPlayerOneTurn= !isPlayerOneTurn;
         }

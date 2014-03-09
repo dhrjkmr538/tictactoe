@@ -4,6 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -16,11 +20,13 @@ public class BoardTest {
 
     private PrintStream printStream;
     private Board board;
+    private ArrayList<String> positions;
 
     @Before
     public void setUp() {
         printStream= mock(PrintStream.class);
-        board= new Board(printStream);
+        positions= new ArrayList<String>(Arrays.asList(" ", " ", " ", " ", " ", " ", " ", " ", " "));
+        board= new Board(printStream, positions);
     }
 
     @Test
@@ -39,53 +45,37 @@ public class BoardTest {
 
     @Test
     public void shouldMarkXWhenPlayerOneMoves() {
-        int location=1;
         String marker="X";
 
-        String updatedBoard = "X| | \n"
-                            + "-----\n"
-                            + " | | \n"
-                            + "-----\n"
-                            + " | | \n";
+        board.mark(1, marker);
 
-        board.mark(location, marker);
-        board.draw();
-
-        verify(printStream).println(updatedBoard);
+        assertEquals("X", positions.get(0));
     }
 
     @Test
     public void shouldMarkOWhenPlayerTwoMoves() {
-        int location=1;
         String marker="O";
 
-        String updatedBoard = "O| | \n"
-                            + "-----\n"
-                            + " | | \n"
-                            + "-----\n"
-                            + " | | \n";
+        board.mark(1, marker);
 
-        board.mark(location, marker);
-        board.draw();
-
-        verify(printStream).println(updatedBoard);
+        assertEquals("O", marker);
     }
 
     @Test
     public void shouldReturnTrueIfLocationIsAlreadyTaken() {
-        int location=3;
+        int location=1;
         String marker="X";
 
         board.mark(location, marker);
 
-        assertTrue(board.isLocationTaken(location));
+        assertTrue(board.isPositionTaken(location));
     }
 
     @Test
     public void shouldReturnFalseIfLocationIsNotTaken() {
         int location=4;
 
-        assertFalse(board.isLocationTaken(location));
+        assertFalse(board.isPositionTaken(location));
     }
 
     @Test
@@ -99,15 +89,9 @@ public class BoardTest {
     public void shouldReturnTrueWhenBoardIsFull() {
         String marker= "X";
 
-        board.mark(1, marker);
-        board.mark(2, marker);
-        board.mark(3, marker);
-        board.mark(4, marker);
-        board.mark(5, marker);
-        board.mark(6, marker);
-        board.mark(7, marker);
-        board.mark(8, marker);
-        board.mark(9, marker);
+        for (int i = 1; i <= positions.size(); i++) {
+            board.mark(i, marker);
+        }
 
         assertTrue(board.isFull());
     }

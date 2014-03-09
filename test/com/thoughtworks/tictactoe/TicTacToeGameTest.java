@@ -40,7 +40,7 @@ public class TicTacToeGameTest {
         when(bufferedReader.readLine())
                 .thenReturn("1");
 
-        when(board.isLocationTaken(1))
+        when(board.isPositionTaken(1))
                 .thenReturn(false);
 
         game.play();
@@ -58,7 +58,7 @@ public class TicTacToeGameTest {
         when(bufferedReader.readLine())
                 .thenReturn("1");
 
-        when(board.isLocationTaken(1))
+        when(board.isPositionTaken(1))
                 .thenReturn(false);
 
         game.play();
@@ -78,7 +78,7 @@ public class TicTacToeGameTest {
         when(player.makeMove(true, bufferedReader))
                 .thenReturn(1);
 
-        when(board.isLocationTaken(1))
+        when(board.isPositionTaken(1))
                 .thenReturn(false);
 
         when(player.getPlayerMarker(true))
