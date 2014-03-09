@@ -58,7 +58,7 @@ public class BoardTest {
 
         board.mark(1, marker);
 
-        assertEquals("O", marker);
+        assertEquals("O", positions.get(0));
     }
 
     @Test
