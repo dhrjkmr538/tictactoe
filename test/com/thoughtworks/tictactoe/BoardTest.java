@@ -96,6 +96,80 @@ public class BoardTest {
         assertTrue(board.isFull());
     }
 
+    @Test
+    public void shouldReturnTrueWhenThreeInARowHorizontally() {
+
+        board.mark(1, "X");
+        board.mark(2, "X");
+        board.mark(3, "X");
+
+        assertTrue(board.isThreeInARow());
+    }
+
+    @Test
+    public void shouldReturnFalseWhenNotThreeInARowHorizontally() {
+
+        board.mark(1, "X");
+        board.mark(2, "X");
+        board.mark(4, "X");
+
+        assertFalse(board.isThreeInARow());
+    }
+
+    @Test
+    public void shouldReturnTrueWhenThreeInARowVertically() {
+
+        board.mark(1, "X");
+        board.mark(4, "X");
+        board.mark(7, "X");
+
+        assertTrue(board.isThreeInARow());
+    }
+
+    @Test
+    public void shouldReturnTrueWhenThreeInARowDiagonally() {
+
+        board.mark(3, "X");
+        board.mark(5, "X");
+        board.mark(7, "X");
+
+        assertTrue(board.isThreeInARow());
+    }
+
+    @Test
+    public void shouldKnowWhenGameIsWon() {
+        board.mark(3, "X");
+        board.mark(5, "X");
+        board.mark(7, "X");
+
+        assertTrue(board.isGameOver());
+    }
+
+    @Test
+    public void shouldKnowWhenGameIsTie() {
+        board.mark(1, "X");
+        board.mark(2, "O");
+        board.mark(3, "X");
+        board.mark(4, "O");
+        board.mark(5, "X");
+        board.mark(6, "O");
+        board.mark(7, "X");
+        board.mark(8, "O");
+        board.mark(9, "X");
+
+        assertTrue(board.isGameOver());
+    }
+
+    @Test
+    public void shouldKnowWhenGameIsNotOver() {
+
+        board.mark(3, "X");
+        board.mark(5, "X");
+        board.mark(4, "X");
+
+        assertFalse(board.isGameOver());
+    }
+
 
 
 }

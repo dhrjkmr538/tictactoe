@@ -44,4 +44,58 @@ public class Board {
     }
 
 
+    //@TODO: refactor
+    public boolean isThreeInARow() {
+        String first = "";
+        String second = "";
+        String third = "";
+
+        // Horizontal Check
+        for (int i = 0; i < positions.size(); i=i+3) {
+            first= positions.get(i);
+            second= positions.get(i + 1);
+            third= positions.get(i + 2);
+
+            if (first.equals(second) && first.equals(third) && !first.equals(" ")) {
+                return true;
+            }
+        }
+
+        // Vertical Check
+        for (int i = 0; i < positions.size() / 3; i++) {
+            first= positions.get(i);
+            second= positions.get(i + 3);
+            third= positions.get(i + 6);
+
+            if (first.equals(second) && first.equals(third) && !first.equals(" ")) {
+                return true;
+            }
+
+        }
+
+        // Diagonal Check
+        first= positions.get(0);
+        second= positions.get(4);
+        third= positions.get(8);
+
+        if (first.equals(second) && first.equals(third) && !first.equals(" ")) {
+            return true;
+        }
+
+        first= positions.get(2);
+        third= positions.get(6);
+
+        if (first.equals(second) && first.equals(third) && !first.equals(" ")) {
+            return true;
+        }
+
+
+        // None of the checks worked
+        return false;
+    }
+
+    public boolean isGameOver() {
+        return isThreeInARow() || isFull();
+    }
+
 }
