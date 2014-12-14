@@ -3,9 +3,6 @@ package com.thoughtworks.tictactoe;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-/**
- * Created by varoske on 3/6/14.
- */
 public class Board {
 
     private final String separator= "-----";
@@ -42,7 +39,6 @@ public class Board {
     public boolean isFull() {
         return (!positions.contains(" "));
     }
-
 
     //@TODO: refactor
     public boolean isThreeInARow() {

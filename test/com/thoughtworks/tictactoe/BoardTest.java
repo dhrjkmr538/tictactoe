@@ -13,9 +13,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-/**
- * Created by varoske on 3/6/14.
- */
 public class BoardTest {
 
     private PrintStream printStream;
@@ -169,7 +166,5 @@ public class BoardTest {
 
         assertFalse(board.isGameOver());
     }
-
-
 
 }
